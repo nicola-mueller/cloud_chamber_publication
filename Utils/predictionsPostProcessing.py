@@ -17,14 +17,8 @@ unet = tf.keras.models.load_model(model_name, compile=False)
 # compile manually
 unet.compile(optimizer="adam", loss=loss.pce_dice_loss, metrics=[loss.dice_coef])
 
-# path = "C:/Users/Nicola/Desktop/Uni/ccp/Data/full_data_set_augmented_validation/"
-# test_images_paths = sorted(glob(os.path.join(path, "validation_images/*")))
-
 path = "C:/Users/Nicola/Desktop/Uni/ccp/Data/full_data_set_augmented_validation/"
 test_images_paths = sorted(glob(os.path.join(path, "validation_images/*")))
-
-path = "C:/Users/Nicola/Desktop/"
-test_images_paths = sorted(glob(os.path.join(path, "PP_Examples/*")))
 
 output_path = "C:/Users/Nicola/Desktop/"
 
@@ -43,20 +37,19 @@ for image_path in test_images_paths:
 
     plt.imshow(tf.math.add(image_utils.create_mask(prediction)*0.8, image))
     plt.axis('off')
-    # plt.title(image_path.removeprefix("C:/Users/Nicola/Desktop/Uni/ccp/Data/full_data_set_augmented_validation/"))
-    # plt.savefig(output_path + str(i) + "_pre", bbox_inches="tight")
     plt.show()
 
     v_filtered = detect_V.detect_V(prediction)
+
+    #  skip the proton filtering for better results
     proton_filtered = detect_protons.detect_protons(v_filtered)
+
     post_processed = post_processing.detect_alpha(proton_filtered)
 
     mask = image_utils.create_mask(post_processed)
     output = tf.math.add(mask*0.8, image)
     plt.axis('off')
-    # plt.title(image_path.removeprefix("C:/Users/Nicola/Desktop/Uni/ccp/Data/full_data_set_augmented_validation/"))
     plt.imshow(output)
-    # plt.savefig(output_path + str(i) + "_post", bbox_inches="tight")
     i += 1
     plt.show()
 

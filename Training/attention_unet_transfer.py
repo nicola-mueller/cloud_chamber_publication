@@ -258,7 +258,7 @@ def gating_signal(input, out_size):
     x = tf.keras.layers.Activation("relu")(x)
     return x
 
-# code taken from https://github.com/MoleImg/Attention_UNet/blob/master/AttResUNet.py
+# code based on https://github.com/MoleImg/Attention_UNet/blob/master/AttResUNet.py
 # and https://gist.github.com/robinvvinod/09c129b1828216da95a0d994482593ea
 def attention_block(x, gating, inter_shape):
     # shapes of encoder and decoder outputs as tuples
