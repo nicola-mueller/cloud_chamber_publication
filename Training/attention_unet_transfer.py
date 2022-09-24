@@ -202,12 +202,13 @@ def pixelwise_crossentropy(y_true, y_predicted):  #
     # important since the data set is very unbalanced
     # weights represent the inverse of the proportion of pixels corresponding to that class in the whole data set
     # needs to be divided by 100.0 to keep the error at a similar magnitude during training
-    weight_alpha = 98.0 / 100.0
-    weight_electron = 75.0 / 100.0
-    weight_proton = 130.0 / 100.0
-    weight_V = 263.0 / 100.0
+    weight_alpha = 104.1 / 100.0
+    weight_electron = 90.5 / 100.0
+    weight_proton = 132.8 / 100.0
+    weight_V = 274.47 / 100.0
+    weight_background = 10.0 / 100.0
 
-    weights = [weight_alpha, weight_electron, weight_proton, weight_V]
+    weights = [weight_alpha, weight_electron, weight_proton, weight_V, weight_background]
 
     # predicted values get scaled such that they are never exactly 0 or 1 since then the logarithm diverges
     y_predicted /= tf.keras.backend.sum(y_predicted, axis=-1, keepdims=True)
