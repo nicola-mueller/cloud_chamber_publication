@@ -11,7 +11,7 @@ import PostProcessing.detect_V as detect_V
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
-model_name = "C:/Users/Nicola/Desktop/Uni/ccp/TrainedModels/attention_transfer_model_clean/"
+model_name = "C:/Users/Nicola/Desktop/Uni/ccp/TrainedModels/attention_transfer_model/"
 unet = tf.keras.models.load_model(model_name, compile=False)
 
 # compile manually
